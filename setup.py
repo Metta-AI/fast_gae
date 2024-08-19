@@ -5,12 +5,13 @@ import os
 
 
 ext_modules = [
-Extension(
-        name="fast_gae",
-        sources=["fast_gae/gae.pyx"],
-        define_macros=[('NPY_NO_DEPRECATED_API', 'NPY_1_7_API_VERSION')],
-        include_dirs=[numpy.get_include()],
-    )]
+    Extension(
+            name="fast_gae.fast_gae",
+            sources=["fast_gae/fast_gae.pyx"],
+            define_macros=[('NPY_NO_DEPRECATED_API', 'NPY_1_7_API_VERSION')],
+            include_dirs=[numpy.get_include()],
+        )
+]
 
 debug = os.getenv('DEBUG', '0') == '1'
 annotate = os.getenv('ANNOTATE', '0') == '1'
@@ -46,7 +47,7 @@ setup(
         annotate=debug or annotate,
     ),
     description='',
-    url='https://github.com/Metta-AI/gae',
+    url='https://github.com/Metta-AI/fast_gae',
     install_requires=[
         'numpy',
         'cython==3.0.11',
