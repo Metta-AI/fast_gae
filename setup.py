@@ -1,8 +1,10 @@
-from setuptools import setup, Extension, find_packages
-from Cython.Build import cythonize
-import numpy
+"""Setup script for fast_gae package."""
+
 import os
 
+import numpy
+from Cython.Build import cythonize
+from setuptools import Extension, find_packages, setup
 
 ext_modules = [
     Extension(
@@ -15,18 +17,18 @@ ext_modules = [
 
 debug = os.getenv('DEBUG', '0') == '1'
 annotate = os.getenv('ANNOTATE', '0') == '1'
-build_dir = 'build'
+BUILD_DIR = 'build'
 if debug:
-    build_dir = 'build_debug'
+    BUILD_DIR = 'build_debug'
 
-os.makedirs(build_dir, exist_ok=True)
+os.makedirs(BUILD_DIR, exist_ok=True)
 
 setup(
     name='fast_gae',
     packages=find_packages(),
     ext_modules=cythonize(
         ext_modules,
-        build_dir=build_dir,
+        build_dir=BUILD_DIR,
         compiler_directives={
             "profile": True,
             "language_level": "3",
